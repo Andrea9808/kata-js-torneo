@@ -103,6 +103,7 @@ const fighters = [
 //**Milestone 1 - Scelta dell’arma:**
 
 //ogni combattente sceglierà casualmente un'arma dalla relativa lista. Una volta scelta, un'arma non sarà più disponibile per i successivi combattenti.
+console.log("I COMBATTENTI SCELGONO LA LORO ARMA!");
 function weaponsToFighters(fighters, weapons) {
     
     // copia l'array di armi per evitare di mutare l'originale
@@ -112,7 +113,7 @@ function weaponsToFighters(fighters, weapons) {
     fighters.forEach(fighter => {
 
         // se ci sono armi disponibili, assegna un'arma casuale al combattente
-        if (availableWeapons.length > 0) {
+        if (availableWeapons.length) {
 
             // genera un indice casuale per selezionare un'arma casuale
             const randomIndex = Math.floor(Math.random() * availableWeapons.length);
@@ -133,3 +134,45 @@ function weaponsToFighters(fighters, weapons) {
 // assegna un'arma casuale a ciascun combattente
 const fightersWithWeapons = weaponsToFighters(fighters, weapons);
 console.table(fightersWithWeapons);
+
+
+//**Milestone 2 - Allenamento:**
+
+//ogni combattente si sottoporrà ad un allenamento che incrementerà (o forse no) la sua potenza, moltiplicandola per un numero casuale tra 1 e 100.
+console.log("I COMBATTENTI SI ALLENANO!");
+function training(fighters) {
+    
+    // assegna un'arma casuale a ciascun combattente
+    const trainedFighters = fighters.map(fighter => {
+
+        // genera un numero casuale tra 1 e 100
+        const training = Math.floor(Math.random() * 100) + 1;
+
+        // moltiplica la potenza del combattente per il numero casuale generato
+        fighter.power *= training;
+
+        // restituisce il combattente allenato
+        return fighter;
+    });
+
+    // restituisce l'array di combattenti allenati
+    return trainedFighters;
+}
+
+const fightersTrained = training(fightersWithWeapons);
+console.table(fightersTrained);
+
+
+//**Milestone 3 - Qualificazione:**
+
+//escludiamo dal torneo chi, dopo l'allenamento non è riuscito a raggiungere una potenza di almeno 2000.
+
+console.log("I COMBATTENTI SI QUALIFICANO!");
+function qualification(fighters) {
+    
+    // restituisce solo i combattenti che hanno una potenza di almeno 2000
+    return fighters.filter(fighter => fighter.power >= 2000);
+}
+
+const fightersQualified = qualification(fightersTrained);
+console.table(fightersQualified);
