@@ -99,3 +99,37 @@ const fighters = [
         power: 250 
     }
   ];
+
+//**Milestone 1 - Scelta dell’arma:**
+
+//ogni combattente sceglierà casualmente un'arma dalla relativa lista. Una volta scelta, un'arma non sarà più disponibile per i successivi combattenti.
+function weaponsToFighters(fighters, weapons) {
+    
+    // copia l'array di armi per evitare di mutare l'originale
+    const availableWeapons = [...weapons]; 
+
+    // assegna un'arma casuale a ciascun combattente tramite il foreach
+    fighters.forEach(fighter => {
+
+        // se ci sono armi disponibili, assegna un'arma casuale al combattente
+        if (availableWeapons.length > 0) {
+
+            // genera un indice casuale per selezionare un'arma casuale
+            const randomIndex = Math.floor(Math.random() * availableWeapons.length);
+
+            // rimuove l'arma selezionata dall'array di armi disponibili e la assegna al combattente
+            const weapon = availableWeapons.splice(randomIndex, 1)[0];
+
+            // assegna l'arma al combattente
+            fighter.weapon = `${weapon.name} (${weapon.power})`;
+        }
+    });
+
+    // restituisce l'array di combattenti con le armi assegnate
+    return fighters;
+}
+
+
+// assegna un'arma casuale a ciascun combattente
+const fightersWithWeapons = weaponsToFighters(fighters, weapons);
+console.table(fightersWithWeapons);
