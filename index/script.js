@@ -176,3 +176,47 @@ function qualification(fighters) {
 
 const fightersQualified = qualification(fightersTrained);
 console.table(fightersQualified);
+
+//**Milestone 4 - Combattimento:**
+
+//i combattimenti si svolgeranno tra un partecipante e il successivo dell'elenco, 
+//assicurandosi che ognuno combatta una sola volta. 
+//In ogni scontro vincerà il combattente con la potenza più alta. 
+//In caso di parità vincerà chi "gioca in casa", ossia chi viene prima nell'elenco.
+//**NB:** bisogna assicurarsi che l'elenco contenga un numero pari di combattenti, 
+//altrimenti l'ultimo non avrebbe un avversario. 
+//Potrebbe essere necessario aggiungere un combattente "Robot" con potenza "4000" all'ultimo minuto.
+
+console.log("I COMBATTIMENTI INIZIANO!");
+function fight(fighters) {
+    
+    // se il numero di combattenti è dispari, aggiunge un combattente "Robot" all'ultimo minuto
+    if (fighters.length % 2 !== 0) {
+        fighters.push({
+            name: 'Robot',
+            power: 4000
+        });
+    }
+
+    // combattimenti
+    const fights = [];
+    for (let i = 0; i < fighters.length; i += 2) {
+        const fighter1 = fighters[i];
+        const fighter2 = fighters[i + 1];
+
+        // determina il vincitore del combattimento
+        const winner = fighter1.power > fighter2.power ? fighter1 : fighter2;
+
+        // aggiunge il combattimento all'array
+        fights.push({
+            fighter1: `${fighter1.name} (${fighter1.power})`,
+            fighter2: `${fighter2.name} (${fighter2.power})`,
+            winner: winner.name
+        });
+    }
+
+    // restituisce l'array di combattimenti
+    return fights;
+}
+
+console.table(fight(fightersQualified));
