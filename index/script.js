@@ -219,4 +219,24 @@ function fight(fighters) {
     return fights;
 }
 
-console.table(fight(fightersQualified));
+const fights = fight(fightersQualified);
+console.table(fights);
+
+
+//**Milestone 5 - Premiazione:**
+
+//tra tutti i vincitori degli scontri, 
+//saliranno sul podio i 3 combattenti con la potenza più alta, in ordine decrescente.
+
+
+console.log("I VINCITORI SALGONO SUL PODIO!");
+function podium(fights) {
+    
+    // ordina i combattenti in ordine decrescente di potenza
+    const winners = fights.sort((a, b) => b.winner.power - a.winner.power);
+
+    // restituisce i primi 3 combattenti
+    return winners.slice(0, 3);
+}
+
+console.table(podium(fights));
